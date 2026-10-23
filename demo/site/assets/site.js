@@ -235,7 +235,13 @@
   // each cut is written from "upper scene shown" (0) to "lower scene shown" (1); going up plays it reversed
   const so = (o) => [{ opacity: 0 }, { opacity: 0, offset: o }, { opacity: 1, offset: o }, { opacity: 1 }];
   const CORTES = {
-    crossfade: { dur: 300, f: (A, B) => [[B, [{ opacity: 0 }, { opacity: 1 }]]] },
+    crossfade: { dur: 600, f: (A, B) => [[B, [{ opacity: 0 }, { opacity: 1 }], 'cubic-bezier(.45, 0, .2, 1)']] },
+    // a passagem da casa (João, 23/10/2026: «nunca fullscreen preto», «suave, quase impercetível»): o fundo novo funde-se
+    // por cima do antigo, com um assentar de escala que mal se nota; sem véu, sem barras, sem clarão
+    suave: { dur: 1400, f: (A, B) => [
+      [A, [{ transform: 'scale(1)' }, { transform: 'scale(1.015)' }], 'cubic-bezier(.45, 0, .2, 1)'],
+      [B, [{ opacity: 0, transform: 'scale(1.035)' }, { opacity: 1, transform: 'scale(1)' }], 'cubic-bezier(.45, 0, .2, 1)'],
+    ] },
     shutter: { dur: 940, f: (A, B) => {
       const m = [{ transform: 'scaleY(0)', easing: EIN }, { transform: 'scaleY(1)', offset: 0.45 }, { transform: 'scaleY(1)', offset: 0.5, easing: E }, { transform: 'scaleY(0)' }];
       return [[mt, m], [mb, m], [B, [{ opacity: 0, transform: 'scale(1.04)' }, { opacity: 0, transform: 'scale(1.04)', offset: 0.47 }, { opacity: 1, transform: 'scale(1.04)', offset: 0.47, easing: E }, { opacity: 1, transform: 'scale(1)' }]]];
@@ -275,8 +281,9 @@
   const CLASSE = { posterdrop: 'caindo', frameslip: 'fotograma' };
 
   function corte(nome, cimaId, baixoId, rev, forca) {
-    let n = forca || nome;
-    if (n === 'burn' && !flashes()) n = 'crossfade';
+    // todas as secções passam pela mesma fusão suave; os cortes antigos (obturador, apagar das luzes, clarão) ficam
+    // no código para outro site, mas aqui não correm: davam ecrãs inteiros pretos entre secções
+    let n = (forca || nome) === 'crossfade' ? 'crossfade' : 'suave';
     if (calma()) n = 'crossfade';
     const spec = CORTES[n] || CORTES.crossfade;
     const A = SC.get(cimaId)?.el, B = SC.get(baixoId)?.el;
@@ -285,9 +292,12 @@
     A.classList.add('vem'); B.classList.add('vem'); A.style.zIndex = '1'; B.style.zIndex = '2';
     if (CLASSE[n]) B.classList.add(CLASSE[n]);
     const tone = SC.get(novoId)?.def.tone === 'light';
-    const tt = setTimeout(() => H.classList.toggle('claro', tone), spec.dur * 0.45);
+    const tt = setTimeout(() => H.classList.toggle('claro', tone), (n === 'suave' && (SC.get(cimaId)?.def.tone === 'light') !== (SC.get(baixoId)?.def.tone === 'light') ? 2400 : spec.dur) * 0.45);
     pulso();
-    const anims = spec.f(A, B).filter(([el]) => el).map(([el, kf, easing]) => el.animate(kf, { duration: spec.dur, easing: easing || 'linear', fill: 'both', direction: rev ? 'reverse' : 'normal' }));
+    // do escuro para o claro (e de volta) a fusão é mais longa: a luz sobe devagar, sem salto
+    const muda = (SC.get(cimaId)?.def.tone === 'light') !== (SC.get(baixoId)?.def.tone === 'light');
+    const dur = n === 'suave' && muda ? 2400 : spec.dur;
+    const anims = spec.f(A, B).filter(([el]) => el).map(([el, kf, easing]) => el.animate(kf, { duration: dur, easing: easing || 'linear', fill: 'both', direction: rev ? 'reverse' : 'normal' }));
     const c = { anims, feito: false };
     c.limpa = () => {
       if (c.feito) return; c.feito = true; clearTimeout(tt);
