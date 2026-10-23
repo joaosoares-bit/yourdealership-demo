@@ -337,9 +337,9 @@ html.js:not(.sem-movimento) .mc-est { position: absolute; left: 0; top: 0; will-
 }
 
 /* ---------- S3 after hours ---------- */
-.s-lantern { position: relative; min-height: 140svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
+.s-lantern { position: relative; min-height: 112svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
 .sec-in { max-width: 40rem; }
-@media (max-width: 760px) { .s-lantern { min-height: 118svh; padding-bottom: 12svh; } }
+@media (max-width: 760px) { .s-lantern { min-height: 100svh; padding-bottom: 12svh; } }
 
 /* ---------- S4 now showing ---------- */
 .s-cartaz { position: relative; min-height: 100svh; padding: calc(var(--cab) + 10svh) var(--gut) 12svh; }
@@ -384,11 +384,11 @@ html.js:not(.sem-movimento) .mc-est { position: absolute; left: 0; top: 0; will-
 }
 
 /* ---------- S5 the drive ---------- */
-.s-drive { position: relative; min-height: 110svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
+.s-drive { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
 @media (max-width: 760px) { .s-drive { min-height: 100svh; } }
 
 /* ---------- S6 trade in (the beat edit behind it) ---------- */
-.s-trade { position: relative; min-height: 125svh; display: grid; grid-template-rows: auto 1fr auto; padding: calc(var(--cab) + 9svh) var(--gut) 10svh; }
+.s-trade { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto auto; align-content: space-between; row-gap: 6svh; padding: calc(var(--cab) + 9svh) var(--gut) 10svh; }
 .cartao-form { grid-row: 3; align-self: end; justify-self: end; width: min(460px, 100%); padding: 28px; border-radius: 14px; background: var(--graphite); border: 1px solid rgba(244, 242, 238, .12); box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
 .form-t { margin: 0 0 18px; font-size: var(--f-xs); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
 .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
@@ -404,7 +404,7 @@ html.js:not(.sem-movimento) .mc-est { position: absolute; left: 0; top: 0; will-
 .campo .msg { font-size: var(--f-mi); letter-spacing: .02em; text-transform: none; color: #ffb3a8; }
 .cartao-form .btn { width: 100%; margin-top: 20px; }
 @media (min-width: 900px) {
-  .s-trade { min-height: 125svh; }
+  .s-trade { min-height: 100svh; }
   .cartao-form { justify-self: stretch; width: auto; max-width: 1240px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; gap: 0 24px; padding: 20px 22px 22px 26px; }
   .cartao-form .form-t { margin: 0 0 15px; white-space: nowrap; }
   .cartao-form .campos { grid-template-columns: 1.5fr .6fr .8fr 1.3fr; }
@@ -412,29 +412,35 @@ html.js:not(.sem-movimento) .mc-est { position: absolute; left: 0; top: 0; will-
   .cartao-form .btn { width: auto; margin: 0; }
 }
 @media (max-width: 760px) {
-  .s-trade { min-height: 120svh; grid-template-rows: auto minmax(52svh, 1fr) auto; padding-top: calc(var(--cab) + 6svh); }
+  .s-trade { min-height: 100svh; grid-template-rows: auto auto; padding-top: calc(var(--cab) + 6svh); }
   .cartao-form { padding: 20px; }
 }
 
 /* ---------- S7 the light wall ---------- */
-.s-luz { position: relative; min-height: 96svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 14svh var(--gut); color: var(--film); transition: color 300ms linear; }
+.s-luz { position: relative; min-height: 82svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 14svh var(--gut); color: var(--film); transition: color 300ms linear; }
 .claro .s-luz { color: var(--ink); }
 .frase { margin: 0; font-size: clamp(2.3rem, 6.4vw, 6.6rem); font-weight: 300; line-height: 1; letter-spacing: -.025em; }
 .s-luz .acts { justify-content: center; }
-@media (max-width: 760px) { .s-luz { min-height: 78svh; } }
+@media (max-width: 760px) { .s-luz { min-height: 70svh; } }
 
 /* ---------- S8 book (the credits) ---------- */
-.s-book { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 6vw; align-items: end; min-height: 100svh; padding: calc(var(--cab) + 14svh) var(--gut) 12svh; }
-.creditos { align-self: center; }
-.cred-marca { margin: 0 0 2.2rem; }
-.cred-l { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; font-size: var(--f-xs); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(244, 242, 238, .88); }
+.s-book { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4svh; min-height: 100svh; padding: calc(var(--cab) + 8svh) var(--gut) 8svh; }
+.creditos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.2rem 2rem; text-align: center; }
+.cred-marca { margin: 0; }
+.cred-l { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.6rem; font-size: var(--f-mi); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: rgba(244, 242, 238, .82); }
 .cred-l .hora { font-size: inherit; }
-.book-in .h2 { margin-bottom: 2rem; font-size: var(--f-m); }
+.book-in { position: relative; z-index: 1; width: min(760px, 100%); padding: clamp(26px, 4vw, 52px); border-radius: 22px; background: rgba(14, 15, 18, .8); border: 1px solid rgba(244, 242, 238, .14); box-shadow: 0 40px 90px rgba(0, 0, 0, .45); }
+.book-in .h2 { margin-bottom: 2rem; font-size: var(--f-m); text-align: center; }
+.book-in .campo input, .book-in .campo select, .book-in .campo textarea { min-height: 54px; border-radius: 12px; background-color: rgba(244, 242, 238, .05); border-color: rgba(244, 242, 238, .16); transition: border-color .3s, box-shadow .3s, background .3s; }
+.book-in .campo input:focus, .book-in .campo select:focus, .book-in .campo textarea:focus { border-color: rgba(242, 239, 234, .7); background-color: rgba(244, 242, 238, .08); box-shadow: 0 0 0 4px rgba(242, 239, 234, .1); }
+.book-in .form-pe { display: grid; justify-items: center; gap: .9rem; margin-top: 1.6rem; text-align: center; }
+.book-in .form-pe .btn { width: 100%; min-height: 56px; justify-content: center; }
 .form-book .campos { gap: 16px; }
 .form-pe { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 22px; }
 .form-nota { margin: 0; font-size: var(--f-mi); color: rgba(244, 242, 238, .78); }
 @media (max-width: 860px) {
-  .s-book { grid-template-columns: 1fr; gap: 9svh; padding-top: calc(var(--cab) + 10svh); }
+  .s-book { gap: 5svh; padding-top: calc(var(--cab) + 6svh); }
+  .book-in { padding: 24px 18px; border-radius: 18px; }
   .form-book .campos { grid-template-columns: 1fr; }
   .form-pe .btn { width: 100%; }
 }
@@ -585,9 +591,9 @@ html.js:not(.sem-movimento) .mc-est { position: absolute; left: 0; top: 0; will-
 .x-indice { list-style: none; margin: 2.2rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 26px; }
 .x-indice a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; font-size: var(--f-xs); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .x-n { color: var(--xenon); font-variant-numeric: tabular-nums; }
-.s-cap { position: relative; min-height: 110svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
+.s-cap { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 0 var(--gut) 16svh; }
 .cap-n { margin: 0 0 1rem; font-size: var(--f-xs); font-weight: 600; letter-spacing: .2em; color: var(--xenon); }
-@media (max-width: 760px) { .s-cap { min-height: 96svh; } }
+@media (max-width: 760px) { .s-cap { min-height: 90svh; } }
 
 /* ---------- visit ---------- */
 .s-visit { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: calc(var(--cab) + 6vh) var(--gut) 12svh; }
